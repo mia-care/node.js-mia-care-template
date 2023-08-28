@@ -17,7 +17,7 @@
     "unit": "jest",
     "version": "npm run update-changelog && npm run update-docker-version && rm -fr Dockerfile.bck && git add CHANGELOG.md Dockerfile",
     "new-endpoint": "./scripts/new-endpoint/new-endpoint.sh",
-    "prepare": "husky install",
+    "prepare": "npx husky install",
     "check-branch-name": "chmod 755 ./scripts/check_branch_naming.sh && bash ./scripts/check_branch_naming.sh"
   },
   "devDependencies": {

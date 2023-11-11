@@ -44,6 +44,6 @@
     }
   },
   "dependencies": {
-    "@mia-platform/custom-plugin-lib": "^5.1.5"
+    "@mia-platform/custom-plugin-lib": "^6.0.2"
   }
 }

@@ -3,7 +3,7 @@
 const schema = require('./schema')
 const handler = require('./handler')
 
-module.exports = function updateMonitoring(fastify, opts, next) {
+module.exports = function plugin(fastify, opts, next) {
   registerRoute(fastify)
 
   next()

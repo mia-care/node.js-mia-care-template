@@ -18,6 +18,7 @@ const customService = require('@mia-platform/custom-plugin-lib')(envVarsSchema)
 const getHelloWorld = require('./src/endpoints/hello-world/get')
 
 const { logMethod } = require('./src/lib/utils')
+const { AUDIT_TRAIL_LOGGING_LEVEL } = require('./src/lib/constants')
 
 module.exports = customService(async function index(service) {
   service.register(getHelloWorld)

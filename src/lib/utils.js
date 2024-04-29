@@ -16,6 +16,7 @@
 
 'use strict'
 
+const { createHash } = require('crypto')
 const stream = require('stream')
 
 const { AUDIT_TRAIL_LOGGING_LEVEL, AUDIT_TRAIL_HASHING_ALGORITHM, AUDIT_TRAIL_VERSION, AUDIT_TRAIL_LOGGING_FIELD } = require('./constants')

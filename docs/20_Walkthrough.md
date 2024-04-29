@@ -50,6 +50,8 @@ const customService = require('@mia-platform/custom-plugin-lib')(envVarsSchema)
 
 const getHelloWorld = require('./src/endpoints/hello-world/get')
 
+const { logMethod } = require('./src/lib/utils')
+
 module.exports = customService(async function index(service) {
   service.register(getHelloWorld)
 
@@ -63,16 +65,30 @@ module.exports = customService(async function index(service) {
 
   decorateRequestWithBuildErrorResponse(service)
 })
+
+module.exports.options = {
+  logger: {
+    customLevels: {
+      audit: AUDIT_TRAIL_LOGGING_LEVEL,
+    },
+    hooks: {
+      logMethod,
+    }
+  },
+}
+
 ```
 
 The `index.js` file already contains:
-- the definition of an simple endpoint `GET /hello-world`;
+- the definition of a simple endpoint `GET /hello-world`;
 - the definition of the Reply Fastify decorators for the error management;
-- the definition of the Request Fastify decorators to enrich the request object.
+- the definition of the Request Fastify decorators to enrich the request object;
+- the logger configuration options to enable audit logs.
 
 Wonderful! You are now ready to start customizing your service! Read next section to learn how.
 
 ### Folder structure
+
 The folder structure should follow this pattern:
 
     .
@@ -155,6 +171,7 @@ It creates:
 - the `handler.test.js` file, that contains the Jest unit tests for the handler.
 
 ### Decorators
+
 The template includes a set of default of request and reply decorators. The [decorators API][fastify-decorators] allows customization of the core Fastify objects, such as the server instance itself and any request and reply objects used during the HTTP request lifecycle. The decorators can be modified and extended with domain-specific notation.
 
 The template contains request and reply decorators for, respectively, enrichment of the request object with additional metadata (e.g. `requestId`) and error management. The template implements the formatter for the most common HTTP errors, allowing to have a common format for the error response that, by default, is the following:

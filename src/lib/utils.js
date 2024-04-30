@@ -19,7 +19,7 @@
 const { createHash } = require('crypto')
 const stream = require('stream')
 
-const { AUDIT_TRAIL_LOGGING_LEVEL, AUDIT_TRAIL_HASHING_ALGORITHM, AUDIT_TRAIL_VERSION, AUDIT_TRAIL_LOGGING_FIELD } = require('./constants')
+const { AUDIT_TRAIL_LOG_LEVEL, AUDIT_TRAIL_HASHING_ALGORITHM, AUDIT_TRAIL_VERSION, AUDIT_TRAIL_LOG_FIELD } = require('./constants')
 
 function throwError(logger, message, code) {
   logger.error({ error: { message } }, message)
@@ -39,10 +39,10 @@ function streamToString(objectToConvert) {
 }
 
 function logMethod(inputArgs, method, level) {
-  if (level === AUDIT_TRAIL_LOGGING_LEVEL && inputArgs.length >= 2) {
+  if (level === AUDIT_TRAIL_LOG_LEVEL && inputArgs.length >= 2) {
     const object = inputArgs.shift()
     const auditObject = {
-      [AUDIT_TRAIL_LOGGING_FIELD]: {
+      [AUDIT_TRAIL_LOG_FIELD]: {
         version: AUDIT_TRAIL_VERSION,
         timestamp: new Date().toISOString(),
         checksum: {

@@ -217,21 +217,23 @@ An integrity checksum (`checksum.value`) computed using preferably the SHA-512 a
 
 ### Metadata
 
-| Field name           | Type   | Required | RFC 3881                                        | FHIR                                  | OpenTelemetry                                     | GCP                                        |
-|----------------------|--------|----------|-------------------------------------------------|---------------------------------------|---------------------------------------------------|--------------------------------------------|
-| `metadata`           | Object | Yes      | -                                               | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                          |
-| `metadata.event`     | String | Yes      | [Event ID][rfc-3881-event-id]                   | [code][fhir-audit-event-code]         | [Attributes][open-telemetry-logs-attributes]      | -                                          |
-| `metadata.severity`  | String | Yes      | -                                               | [severity][fhir-audit-event-severity] | [SeverityText][open-telemetry-logs-severity-text] | [severity][gcp-cloud-logging-log-severity] |
-| `metadata.operation` | String | No       | [Event Action Code][rfc-3881-event-action-code] | [action][fhir-audit-event-action]     | [Attributes][open-telemetry-logs-attributes]      | -                                          |
-| `metadata.resource`  | String | No       | -                                               | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                          |
-| `metadata.source`    | String | Yes      | [Audit Source ID][rfc-3881-audit-source-id]     | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                          |
-| `metadata.user`      | String | No       | [User ID][rfc-3881-user-id]                     | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                          |
+| Field name           | Type   | Required | RFC 3881                                                                            | FHIR                                  | OpenTelemetry                                     | GCP                                           |
+|----------------------|--------|----------|-------------------------------------------------------------------------------------|---------------------------------------|---------------------------------------------------|-----------------------------------------------|
+| `metadata`           | Object | Yes      | -                                                                                   | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                             |
+| `metadata.event`     | String | Yes      | [Event ID][rfc-3881-event-id]                                                       | [code][fhir-audit-event-code]         | [Attributes][open-telemetry-logs-attributes]      | -                                             |
+| `metadata.severity`  | String | Yes      | -                                                                                   | [severity][fhir-audit-event-severity] | [SeverityText][open-telemetry-logs-severity-text] | [severity][gcp-cloud-logging-log-severity]    |
+| `metadata.operation` | String | No       | [Event Action Code][rfc-3881-event-action-code]                                     | [action][fhir-audit-event-action]     | [Attributes][open-telemetry-logs-attributes]      | -                                             |
+| `metadata.request`   | String | No       | [Network Access Point Identification][rfc-3881-network-access-point-identification] | -                                     | [Attributes][open-telemetry-logs-attributes]      | [HttpRequest][gcp-cloud-logging-http-request] |
+| `metadata.resource`  | String | No       | -                                                                                   | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                             |
+| `metadata.source`    | String | Yes      | [Audit Source ID][rfc-3881-audit-source-id]                                         | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                             |
+| `metadata.user`      | String | No       | [User ID][rfc-3881-user-id]                                                         | -                                     | [Attributes][open-telemetry-logs-attributes]      | -                                             |
 
 Event metadata that provides context information for quick browsing and searching:
 
 - `event`: type of event (API called, job executed, medical record updated, etc.);
 - `severity`: the log level associated to the event, shall have any of the values listed in the table below;
 - `operation`: type of operation performed (record created, read, accessed or deleted, etc.);
+- `request`: the ID of the request triggering or originating the event;
 - `resource`: unique identifier of the main resource affected by the operation (medical record ID, etc.);
 - `source`: unique identifier of the application or system where the event occurs and the audit log is generated;
 - `user`: unique identifier of the user who triggered the request.

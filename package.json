@@ -30,7 +30,7 @@
     "nock": "^13.5.4"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "private": true,
   "eslintConfig": {

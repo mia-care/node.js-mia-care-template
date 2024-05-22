@@ -239,6 +239,20 @@ An integrity checksum (`checksum.value`) computed using preferably the SHA-512 a
 }
 ```
 
+### Message
+
+| Field name | Type   | Required | RFC 3881 | FHIR | OpenTelemetry | GCP |
+|------------|--------|----------|----------|------|---------------|-----|
+| `message`  | String | No       | -        | -    | -             | -   |
+
+The log message.
+
+```json
+{
+  "message": "A log message"
+}
+```
+
 ### Metadata
 
 | Field name           | Type   | Required | RFC 3881                                                                            | FHIR                                  | OpenTelemetry                                     | GCP                                           |

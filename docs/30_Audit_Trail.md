@@ -159,6 +159,17 @@ The [CRUD Service][crud-service] should connect to MongoDB using dedicated crede
 
 If you configure an endpoint for the CRUD collection, you should disable all endpoints except for `POST /` and `GET /`, to insert and query audit logs respectively.
 
+You must create a CRUD collection with the custom fields described in the following table or you can easily import the fields from <a download target="_blank" href="docs_files_to_download/audit_logs.json">this JSON file</a>
+
+| Name        | Type      | Required | Nullable |
+|-------------|-----------|----------|----------|
+| `version`   | String    | No       | No       |
+| `timestamp` | Date      | No       | No       |
+| `severity`  | String    | No       | No       |
+| `metadata`  | RawObject | No       | No       |
+| `checksum`  | RawObject | No       | No       |
+| `message`   | String    | No       | No       |
+
 ## Data model
 
 :::info

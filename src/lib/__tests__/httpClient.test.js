@@ -5,9 +5,9 @@
 'use strict'
 
 const loggerMock = require('abstract-logging')
-const serviceProxyClient = require('../serviceProxyClient')
+const httpClient = require('../httpClient')
 
-describe('serviceProxyClient', () => {
+describe('httpClient', () => {
   describe('get', () => {
     it('throws if the service returns a status < 200 or >= 300', async() => {
       const serviceMock = {
@@ -17,7 +17,7 @@ describe('serviceProxyClient', () => {
         serviceName: 'name',
       }
       try {
-        await serviceProxyClient.get(serviceMock, '/test', {}, {}, loggerMock)
+        await httpClient.get(serviceMock, '/test', {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('name GET /test responded with a 400 status code')
       }
@@ -32,7 +32,7 @@ describe('serviceProxyClient', () => {
       }
 
       try {
-        await serviceProxyClient.get(serviceMock, '/test', {}, {}, loggerMock)
+        await httpClient.get(serviceMock, '/test', {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('error')
       }
@@ -47,7 +47,7 @@ describe('serviceProxyClient', () => {
         serviceName: 'name',
       }
 
-      const response = await serviceProxyClient.get(serviceMock, '/test', {}, {}, loggerMock)
+      const response = await httpClient.get(serviceMock, '/test', {}, {}, loggerMock)
 
       expect(response).toEqual(mockPayload)
     })
@@ -63,7 +63,7 @@ describe('serviceProxyClient', () => {
       }
 
       try {
-        await serviceProxyClient.getById(serviceMock, '/orders', '1234', {}, loggerMock)
+        await httpClient.getById(serviceMock, '/orders', '1234', {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('CRUD GET BY ID /orders/1234 responded with a 400 status code')
       }
@@ -77,7 +77,7 @@ describe('serviceProxyClient', () => {
       }
 
       try {
-        await serviceProxyClient.getById(serviceMock, '/orders', '1234', {}, loggerMock)
+        await httpClient.getById(serviceMock, '/orders', '1234', {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('error')
       }
@@ -91,7 +91,7 @@ describe('serviceProxyClient', () => {
         },
       }
 
-      const response = await serviceProxyClient.getById(serviceMock, '/orders', '1234', {}, loggerMock)
+      const response = await httpClient.getById(serviceMock, '/orders', '1234', {}, loggerMock)
 
       expect(response).toEqual(mockPayload)
     })
@@ -106,7 +106,7 @@ describe('serviceProxyClient', () => {
         serviceName: 'name',
       }
       try {
-        await serviceProxyClient.post(serviceMock, '/send', {}, {}, {}, loggerMock)
+        await httpClient.post(serviceMock, '/send', {}, {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('Failed name POST - /send with code 400')
       }
@@ -121,7 +121,7 @@ describe('serviceProxyClient', () => {
       }
 
       try {
-        await serviceProxyClient.post(serviceMock, '/send', {}, {}, {}, loggerMock)
+        await httpClient.post(serviceMock, '/send', {}, {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('error')
       }
@@ -136,7 +136,7 @@ describe('serviceProxyClient', () => {
         serviceName: 'name',
       }
 
-      const response = await serviceProxyClient.post(serviceMock, '/send', {}, {}, {}, loggerMock)
+      const response = await httpClient.post(serviceMock, '/send', {}, {}, {}, loggerMock)
 
       expect(response).toEqual(mockPayload)
     })
@@ -151,7 +151,7 @@ describe('serviceProxyClient', () => {
         serviceName: 'name',
       }
       try {
-        await serviceProxyClient.patch(serviceMock, '/test', {}, {}, loggerMock)
+        await httpClient.patch(serviceMock, '/test', {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('Failed name PATCH /test with code 400')
       }
@@ -165,7 +165,7 @@ describe('serviceProxyClient', () => {
       }
 
       try {
-        await serviceProxyClient.patch(serviceMock, '/test', {}, {}, loggerMock)
+        await httpClient.patch(serviceMock, '/test', {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('error')
       }
@@ -179,7 +179,7 @@ describe('serviceProxyClient', () => {
         },
       }
 
-      const response = await serviceProxyClient.patch(serviceMock, '/test', {}, {}, loggerMock)
+      const response = await httpClient.patch(serviceMock, '/test', {}, {}, loggerMock)
 
       expect(response).toEqual(mockPayload)
     })
@@ -195,7 +195,7 @@ describe('serviceProxyClient', () => {
         serviceName: 'name',
       }
       try {
-        await serviceProxyClient.patchById(serviceMock, '/orders', 'id', {}, {}, loggerMock)
+        await httpClient.patchById(serviceMock, '/orders', 'id', {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('Failed name PATCH BY ID /orders with code 400')
       }
@@ -209,7 +209,7 @@ describe('serviceProxyClient', () => {
       }
 
       try {
-        await serviceProxyClient.patchById(serviceMock, '/orders', 'id', {}, {}, loggerMock)
+        await httpClient.patchById(serviceMock, '/orders', 'id', {}, {}, loggerMock)
       } catch (error) {
         expect(error.message).toEqual('error')
       }
@@ -223,7 +223,7 @@ describe('serviceProxyClient', () => {
         },
       }
 
-      const response = await serviceProxyClient.patchById(serviceMock, '/orders', 'id', {}, {}, loggerMock)
+      const response = await httpClient.patchById(serviceMock, '/orders', 'id', {}, {}, loggerMock)
 
       expect(response).toEqual(mockPayload)
     })

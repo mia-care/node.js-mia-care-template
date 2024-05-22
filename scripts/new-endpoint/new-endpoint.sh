@@ -86,7 +86,7 @@ echo "Endpoint created successfully"
 file_name="./index.js"
 
 # String to search for in the file
-search_string="module.exports"
+search_string="module.exports ="
 
 # Line to add before the line containing the string
 endpoint_declaration="const $NAME = require('$FOLDER')

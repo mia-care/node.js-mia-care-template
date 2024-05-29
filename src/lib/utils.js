@@ -41,6 +41,7 @@ function streamToString(objectToConvert) {
 function logMethod(inputArgs, method, level) {
   if (level === AUDIT_TRAIL_LOG_LEVEL && inputArgs.length >= 2) {
     const object = inputArgs.shift()
+    const message = inputArgs.shift()
     const auditObject = {
       [AUDIT_TRAIL_LOG_FIELD]: {
         version: AUDIT_TRAIL_VERSION,
@@ -52,9 +53,10 @@ function logMethod(inputArgs, method, level) {
             .digest('hex'),
         },
         metadata: object,
+        message,
       },
     }
-    return method.apply(this, [auditObject, ...inputArgs])
+    return method.apply(this, [auditObject, message, ...inputArgs])
   }
   return method.apply(this, inputArgs)
 }

@@ -258,7 +258,7 @@ So, given the example above, the resulting log on MongoDB will have a structure 
 The audit logs are enriched with several fields and converted to a canonical form before being stored into MongoDB:
 
 - `version`: the version of the audit logs reference schema;
-- `timestamp`: when the audit log was recorded ;
+- `timestamp`: when the audit log was recorded;
 - `checksum`: this checksum is generated automatically from the original log (available in the `rawLog` field);
 - `metadata`: this field contains all the log fields, including the ones passed as first argument to the logger;
 - `message`: this field contains the original log message (currently the message must be in the log `msg` field);

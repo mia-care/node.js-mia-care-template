@@ -16,10 +16,7 @@
 
 'use strict'
 
-const { createHash } = require('crypto')
 const stream = require('stream')
-
-const { AUDIT_TRAIL_LOG_LEVEL, AUDIT_TRAIL_HASHING_ALGORITHM, AUDIT_TRAIL_VERSION, AUDIT_TRAIL_LOG_FIELD } = require('./constants')
 
 function throwError(logger, message, code) {
   logger.error({ error: { message } }, message)
@@ -38,31 +35,7 @@ function streamToString(objectToConvert) {
   })
 }
 
-function logMethod(inputArgs, method, level) {
-  if (level === AUDIT_TRAIL_LOG_LEVEL && inputArgs.length >= 2) {
-    const object = inputArgs.shift()
-    const message = inputArgs.shift()
-    const auditObject = {
-      [AUDIT_TRAIL_LOG_FIELD]: {
-        version: AUDIT_TRAIL_VERSION,
-        timestamp: new Date().toISOString(),
-        checksum: {
-          algorithm: AUDIT_TRAIL_HASHING_ALGORITHM,
-          value: createHash(AUDIT_TRAIL_HASHING_ALGORITHM)
-            .update(JSON.stringify(object))
-            .digest('hex'),
-        },
-        metadata: object,
-        message,
-      },
-    }
-    return method.apply(this, [auditObject, message, ...inputArgs])
-  }
-  return method.apply(this, inputArgs)
-}
-
 module.exports = {
   throwError,
   streamToString,
-  logMethod,
 }

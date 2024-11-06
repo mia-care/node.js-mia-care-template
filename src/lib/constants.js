@@ -26,16 +26,10 @@ const REMOTE_FETCHING_ERROR = {
   title: 'Unexpected error. Try later or contact an admin.',
 }
 
-const AUDIT_TRAIL_HASHING_ALGORITHM = 'sha512'
-const AUDIT_TRAIL_LOG_FIELD = 'auditLog'
 const AUDIT_TRAIL_LOG_LEVEL = 1100
-const AUDIT_TRAIL_VERSION = '1.0.0'
 
 module.exports = {
-  AUDIT_TRAIL_HASHING_ALGORITHM,
-  AUDIT_TRAIL_LOG_FIELD,
   AUDIT_TRAIL_LOG_LEVEL,
-  AUDIT_TRAIL_VERSION,
   CHAT_USERS_ROLES,
   REMOTE_FETCHING_ERROR,
 }
